@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: "Coeuvre 的博客"
+    title: "Coeuvre's Blog"
   },
   plugins: [
     `gatsby-plugin-typescript`,
-    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

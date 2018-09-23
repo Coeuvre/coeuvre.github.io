@@ -1,33 +1,72 @@
 import { graphql } from "gatsby";
 import * as React from "react";
-import styled from "styled-components";
+import { injectGlobal } from "react-emotion";
 
-const H1 = styled.h1`
-  display: inline-block;
-  border-bottom: 1px solid;
+injectGlobal`
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #eee;
+  }
 `;
 
-const H3 = styled.h3`
-  margin-bottom: 0;
-`;
+const Header = () => (
+  <header
+    css={{
+      padding: "0 40px"
+    }}
+  >
+    <h1>Coeuvre's Blog</h1>
+  </header>
+);
 
-const Span = styled.span`
-  color: #bbb;
-`;
+const Main = (props: any) => (
+  <main css={{ display: "flex", flexDirection: "row" }}>
+    <Posts {...props} />
+    <Menu />
+  </main>
+);
 
-export default ({ data }: any) => {
+const Posts = ({ data }: any) => (
+  <section css={{ flex: "1 1 auto", padding: "0 40px" }}>
+    <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+    {data.allMarkdownRemark.edges.map(({ node }: any) => (
+      <Post key={node.id} node={node} />
+    ))}
+  </section>
+);
+
+const Post = ({ node }: any) => (
+  <article>
+    <h3>
+      {node.frontmatter.title} — {node.frontmatter.date}
+    </h3>
+    <p>{node.excerpt}</p>
+  </article>
+);
+
+const Menu = () => (
+  <aside css={{ margin: 0, padding: 0, width: 200, flex: "0 0 auto" }}>
+    aaa
+  </aside>
+);
+
+export default (props: any) => {
   return (
-    <div>
-      <H1>Coeuvre 的博客</H1>
-      <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-      {data.allMarkdownRemark.edges.map(({ node }: any) => (
-        <div key={node.id}>
-          <H3>
-            {node.frontmatter.title} <Span>— {node.frontmatter.date}</Span>
-          </H3>
-          <p>{node.excerpt}</p>
-        </div>
-      ))}
+    <div
+      css={{
+        width: 1000,
+        margin: "0 auto",
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      <Header />
+      <Main {...props} />
     </div>
   );
 };
