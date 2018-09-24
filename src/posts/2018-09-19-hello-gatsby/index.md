@@ -1,7 +1,6 @@
 ---
 title: Pandas
 date: 2018-09-19T15:28:00Z
-category: aa
 tags:
   - test
   - gatsby
