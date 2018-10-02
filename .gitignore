@@ -60,3 +60,5 @@ typings/
 .cache/
 yarn-error.log
 .vscode/
+
+.DS_Store
